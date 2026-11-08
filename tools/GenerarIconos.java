@@ -33,6 +33,7 @@ public class GenerarIconos {
         String[] d = {"mdpi", "hdpi", "xhdpi", "xxhdpi", "xxxhdpi"};
         for (int i = 0; i < px.length; i++) {
             write(legacy(disc, px[i]), res, "mipmap-" + d[i] + "/ic_launcher.png");
+            write(legacy(disc, px[i]), res, "mipmap-" + d[i] + "/ic_launcher_round.png"); // placeholder de una libreria
         }
         // Icono 512 para la web/README
         write(legacy(disc, 512), res, "../icono-512.png");
