@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Inteliworks Talk - personalizacion (branding) del cliente Android de Nextcloud Talk
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<resources>
+    <!-- Nombre (launcher = nc_app_name; cuenta Android, pantallas y login web = nc_app_product_name) -->
+    <string name="nc_app_name">Inteliworks Talk</string>
+    <string name="nc_app_product_name">Inteliworks Talk</string>
+    <!-- Nombre del servidor en textos de bienvenida/errores ("direccion de tu servidor %s") -->
+    <string name="nc_server_product_name">Inteliworks Cloud</string>
+
+    <!-- Login: cada empresa tiene su propio servidor (p. ej. https://cloud.conpav.cl), no se fija uno -->
+    <string name="weblogin_url" translatable="false"></string>
+    <bool name="hide_provider">true</bool>
+    <string name="nc_providers_url" translatable="false"></string>
+    <bool name="is_branded_client">true</bool>
+
+    <!-- Integracion con nuestra app de archivos Inteliworks Cloud (cl.inteliworks.cloud):
+         importar cuentas ya configuradas y abrir archivos compartidos en ella (misma firma) -->
+    <string name="nc_import_accounts_from" translatable="false">cl.inteliworks.cloud</string>
+    <string name="nc_import_account_type" translatable="false">cl.inteliworks.cloud</string>
+
+    <!-- Ayuda / privacidad / soporte -> Inteliworks -->
+    <string name="nc_privacy_url" translatable="false">https://inteliworks.cl/politica-privacidad.html</string>
+    <string name="nc_report_email" translatable="false">soporte@inteliworks.cl</string>
+    <string name="nc_talk_android_issues_url" translatable="false">https://inteliworks.cl</string>
+    <string name="osm_geocoder_contact" translatable="false">soporte@inteliworks.cl</string>
+
+    <!-- Licencia GPL: el codigo fuente de esta version es este repositorio + Nextcloud Talk upstream -->
+    <string name="nc_source_code_url" translatable="false">https://github.com/Inteliworks-cl/inteliworks-talk-android</string>
+
+    <!-- Colores de marca -->
+    <color name="iw_brand">#1E90D6</color>
+    <color name="colorPrimary">#1E90D6</color>
+    <color name="colorPrimaryDark">#1673AD</color>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Inteliworks Talk - personalizacion (branding) del cliente Android de Nextcloud Talk
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<resources>
+    <color name="colorPrimary">#1E90D6</color>
+    <color name="colorPrimaryDark">#1673AD</color>
+</resources>

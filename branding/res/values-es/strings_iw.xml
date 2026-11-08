@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Inteliworks Talk - personalizacion (branding) del cliente Android de Nextcloud Talk
+  ~ SPDX-License-Identifier: GPL-3.0-or-later
+-->
+<resources>
+    <string name="nc_show_ecosystem_description">Sugerencias de aplicaciones en el cuadro de diálogo de la cuenta seleccionada</string>
+</resources>

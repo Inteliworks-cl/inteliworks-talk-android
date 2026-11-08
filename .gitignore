@@ -1,0 +1,7 @@
+*.jks
+*.keystore
+keystore.env
+upstream/
+dist/
+out/
+*.apk
