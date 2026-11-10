@@ -1,6 +1,6 @@
 # Compila Inteliworks Talk (Android) = Nextcloud Talk Android (tag UPSTREAM_TAG) + branding/
 # El APK sale SIN FIRMAR; se firma en condor3033 con tools/firmar-y-publicar.sh (el keystore no sale de ahi).
-name: Build APK
+name: Build APK + AAB
 
 on:
   push:
@@ -73,6 +73,25 @@ jobs:
           mkdir -p dist && cp "$APK" "dist/$NAME"
           ls -la dist
           echo "name=$NAME" >> "$GITHUB_OUTPUT"
+
+      # Google Play: mismo codigo y versionCode que el APK (Play App Signing; se firma en condor
+      # con tools/firmar-aab.sh). Se compila despues del APK, que queda igual.
+      - name: Compilar AAB Google Play (sin firmar)
+        working-directory: upstream
+        run: |
+          ./gradlew --no-daemon bundleGenericRelease
+          AAB=$(find app/build/outputs/bundle/genericRelease -name '*.aab' | head -n1)
+          test -n "$AAB"
+          mkdir -p ../dist-aab
+          cp "$AAB" "../dist-aab/inteliworks-talk-${{ steps.v.outputs.ver }}-iw${{ steps.v.outputs.rev }}-play-unsigned.aab"
+          ls -la ../dist-aab
+
+      - name: Subir artefacto AAB
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: inteliworks-talk-aab
+          path: dist-aab/*.aab
+          retention-days: 30
 
       - name: Subir artefacto
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
