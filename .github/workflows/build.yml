@@ -7,6 +7,11 @@ on:
     branches: [ main ]
   pull_request:
   workflow_dispatch:
+    inputs:
+      plan_b:
+        description: 'AAB Google Play PLAN B (sin READ_MEDIA_*; usar solo si Play rechaza la declaracion de fotos/videos)'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -78,12 +83,19 @@ jobs:
       # con tools/firmar-aab.sh). Se compila despues del APK, que queda igual.
       - name: Compilar AAB Google Play (sin firmar)
         working-directory: upstream
+        env:
+          PLAN_B: ${{ inputs.plan_b && 'true' || 'false' }}
         run: |
+          NAME="inteliworks-talk-${{ steps.v.outputs.ver }}-iw${{ steps.v.outputs.rev }}-play-unsigned.aab"
+          if [ "$PLAN_B" = "true" ]; then
+            ../branding/play-planB.sh .
+            NAME="inteliworks-talk-${{ steps.v.outputs.ver }}-iw$(( ${{ steps.v.outputs.rev }} + 1 ))-planB-play-unsigned.aab"
+          fi
           ./gradlew --no-daemon bundleGenericRelease
           AAB=$(find app/build/outputs/bundle/genericRelease -name '*.aab' | head -n1)
           test -n "$AAB"
           mkdir -p ../dist-aab
-          cp "$AAB" "../dist-aab/inteliworks-talk-${{ steps.v.outputs.ver }}-iw${{ steps.v.outputs.rev }}-play-unsigned.aab"
+          cp "$AAB" "../dist-aab/$NAME"
           ls -la ../dist-aab
 
       - name: Subir artefacto AAB

@@ -47,5 +47,14 @@ echo "--- permisos ---"
 for p in MANAGE_EXTERNAL_STORAGE REQUEST_INSTALL_PACKAGES QUERY_ALL_PACKAGES; do
   grep -q "android.permission.$p\$" "$OUT.permisos.txt" && echo "AVISO: el .aab declara $p (requiere declaracion en Play)"
 done
+if [[ "$OUT" == *planB* ]]; then   # plan B Talk: sin permisos de fotos/videos/audio, resto intacto
+  for p in READ_MEDIA_IMAGES READ_MEDIA_VIDEO READ_MEDIA_AUDIO READ_MEDIA_VISUAL_USER_SELECTED; do
+    grep -q "android.permission.$p\$" "$OUT.permisos.txt" && { echo "ERROR plan B: el .aab declara $p"; exit 1; }
+  done
+  for p in CAMERA RECORD_AUDIO FOREGROUND_SERVICE_CAMERA FOREGROUND_SERVICE_MICROPHONE MODIFY_AUDIO_SETTINGS BLUETOOTH_CONNECT; do
+    grep -q "android.permission.$p\$" "$OUT.permisos.txt" || { echo "ERROR plan B: falta $p"; exit 1; }
+  done
+  echo "plan B OK: sin READ_MEDIA_*; camara/microfono/llamadas declarados"
+fi
 sha256sum "$OUT" | tee "$OUT.sha256"
 echo "Listo: $OUT (corrida $RUN). Subir en Play Console > Produccion/Prueba interna > Crear version."
