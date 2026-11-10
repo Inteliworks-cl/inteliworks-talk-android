@@ -74,3 +74,11 @@ Basado en Nextcloud Talk Android © Nextcloud GmbH y colaboradores, licencia **G
 (ver `LICENSE.txt`). Las modificaciones de este repositorio se distribuyen bajo la misma licencia.
 El código fuente correspondiente a cada APK es este repositorio en el commit del release más
 `nextcloud/talk-android` en el tag indicado en `UPSTREAM_TAG`.
+
+## Google Play (.aab)
+
+CI también genera `bundleGenericRelease` (artefacto `*-aab`, mismo `versionCode` que el APK). En la app de
+archivos, `branding/play.sh` quita del .aab los permisos restringidos por Play (`MANAGE_EXTERNAL_STORAGE`,
+`REQUEST_INSTALL_PACKAGES`); el APK de Releases no cambia. Firmar en condor3033 con
+`tools/firmar-aab.sh cloud|talk [run_id]` (jarsigner con la misma llave = *upload key* / llave de firma
+de Play App Signing) → queda en `/root/apps-cloud/tiendas/aab/`. No sube nada a Play.
